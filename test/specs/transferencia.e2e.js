@@ -1,12 +1,21 @@
 import TransferenciaPage from '../pageobjects/transferencias.page.js'
 import LoginPage from '../pageobjects/login.page.js'
+import LoginData from '../../data/login.json'
+import TransferenciasData from '../../data/transferencias.json'
+
 
 describe('Transferencias en BNM App', () => {
     beforeEach(async() => {
-        await LoginPage.loginApp('503260547','zxcv1234')
+        const usuario = LoginData.usuario,
+        password = LoginData.password
+
+        await LoginPage.loginApp(usuario,password)
         await LoginPage.aceptarPermisosApp();
     })
     it('Hacer una transferencia TFT', async () => {
+        const montoTFT = TransferenciasData.montoTFT,
+        conceptoTFT = TransferenciasData.conceptoTFT
+
         await TransferenciaPage.IngresarTransferencias();
         await TransferenciaPage.IngresarTransferenciasHaciaOtrosBancos();
         await TransferenciaPage.AceptarTerminosTransferencias();
@@ -15,8 +24,8 @@ describe('Transferencias en BNM App', () => {
         // llenar los datos de la transferencia
         await TransferenciaPage.seleccionarCuentaCreditoTFT();
         await TransferenciaPage.seleccionarCuentaDebitoTFT();
-        await TransferenciaPage.ingresarMontoTFT();
-        await TransferenciaPage.ingresarConceptoTFT("E021 prueba de auto");
+        await TransferenciaPage.ingresarMontoTFT(montoTFT);
+        await TransferenciaPage.ingresarConceptoTFT(conceptoTFT);
         await TransferenciaPage.clickBotonContinuarTFT();
 
         // pantalla confirmacion

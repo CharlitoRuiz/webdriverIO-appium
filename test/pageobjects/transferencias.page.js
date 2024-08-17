@@ -69,8 +69,8 @@ class TransferenciaPage extends Page {
     await this.cmbCuentaDebitarTFT.click();
     await this.cuentaDebitoTFT.click();
   }
-  async ingresarMontoTFT(){
-    await this.txtMonto.setValue("1000");
+  async ingresarMontoTFT(monto){
+    await this.txtMonto.setValue(monto);
   }
   async ingresarConceptoTFT(concepto){
     await this.conceptoTFT.setValue(concepto);
